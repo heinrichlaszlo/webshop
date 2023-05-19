@@ -14,10 +14,12 @@ import static com.example.webshop.csvWriter.CsvWriter.writeToCsvFile;
 public class Tasks {
 
     public static final String COSTUMER_PATH = "src/main/resources/customer.csv";
+
     public static final String PAYMENTS_PATH = "src/main/resources/payments.csv";
 
 
     public static void writeTasksToCsvFiles() {
+
         List<Customer> customers = null;
         List<Payment> payments = null;
 
@@ -33,19 +35,14 @@ public class Tasks {
                 { "name","address","sumOfPurchases"};
 
         writeToCsvFile("src/main/resources/report01.csv", sumOfAllPurchases,costumerPurchaseColumns,CostumerPurchase.class);
-        System.out.println(sumOfAllPurchases);
+
         writeToCsvFile("src/main/resources/top.csv", getHighestAndSecondHighestPurchases(sumOfAllPurchases),costumerPurchaseColumns,CostumerPurchase.class);
 
         String[] webShopPurchaseColumns = new String[]
                 { "webshop","sumOfCardPayments","sumOfBankPayments"};
 
-        System.out.println(getSumOfWebshopPurchases(payments));
         writeToCsvFile("src/main/resources/report02.csv",getSumOfWebshopPurchases(payments),webShopPurchaseColumns, WebshopPurchase.class);
-        System.out.println(Arrays.stream(webShopPurchaseColumns).toList());
-        System.out.println(Arrays.stream(webShopPurchaseColumns).toList());
     }
-
-
 
     //feladat 3
     private static List<CostumerPurchase> getSumOfAllPurchases(List<Customer> customers, List<Payment> payments){
