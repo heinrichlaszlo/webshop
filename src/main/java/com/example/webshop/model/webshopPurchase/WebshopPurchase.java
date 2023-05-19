@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Builder
-public class WebshopPuchase {
+public class WebshopPurchase {
 
     String webshop;
     Integer sumOfCardPayments;

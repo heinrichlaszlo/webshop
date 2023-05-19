@@ -4,7 +4,7 @@ import com.example.webshop.csvReader.CsvReader;
 import com.example.webshop.model.customer.Customer;
 import com.example.webshop.model.payments.Payment;
 import com.example.webshop.model.costumerPurchases.CostumerPurchase;
-import com.example.webshop.model.webshopPurchase.WebshopPuchase;
+import com.example.webshop.model.webshopPurchase.WebshopPurchase;
 
 import java.io.IOException;
 import java.util.*;
@@ -40,7 +40,7 @@ public class Tasks {
                 { "webshop","sumOfCardPayments","sumOfBankPayments"};
 
         System.out.println(getSumOfWebshopPurchases(payments));
-        writeToCsvFile("src/main/resources/report02.csv",getSumOfWebshopPurchases(payments),webShopPurchaseColumns,WebshopPuchase.class);
+        writeToCsvFile("src/main/resources/report02.csv",getSumOfWebshopPurchases(payments),webShopPurchaseColumns, WebshopPurchase.class);
         System.out.println(Arrays.stream(webShopPurchaseColumns).toList());
         System.out.println(Arrays.stream(webShopPurchaseColumns).toList());
     }
@@ -76,17 +76,17 @@ public class Tasks {
     }
 
     //feladat 5
-    private static List<WebshopPuchase> getSumOfWebshopPurchases(List<Payment> payments){
+    private static List<WebshopPurchase> getSumOfWebshopPurchases(List<Payment> payments){
         Set<String> webShops = new HashSet<>();
 
         for(Payment payment: payments) {
             webShops.add(payment.getWebShopId());
         }
 
-        List<WebshopPuchase> webshopPurchases = new ArrayList<>();
+        List<WebshopPurchase> webshopPurchases = new ArrayList<>();
 
         for(String webShop: webShops){
-            webshopPurchases.add(WebshopPuchase.builder().webshop(webShop).sumOfCardPayments(payments.stream()
+            webshopPurchases.add(WebshopPurchase.builder().webshop(webShop).sumOfCardPayments(payments.stream()
                     .filter(payment -> payment.getPaymentMethod()
                     .equals("card") && payment.getWebShopId().equals(webShop))
                     .mapToInt(payment -> payment.getAmount()).sum())
